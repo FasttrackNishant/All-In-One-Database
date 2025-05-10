@@ -1,0 +1,121 @@
+-> to view databaeses
+show dbs;
+
+-> to use databaeses
+use db_name
+
+->to view current databaes
+db
+
+-> delete datbase
+db.dropDatabase()
+
+-->  to view collection
+show collections
+
+-->to create collection
+db.createColletion('name')
+
+-->to delete collection
+db.<collection_name>.drop()
+ ~~
+ For Rows
+
+-->to insert Rows
+db.comments.insert({
+    'name':'mongo',
+    'age' : 34
+})
+
+-->Show all Rows in a Collection 
+db.comments.find()
+
+-->Show all Rows in a Collection (Prettified)
+db.comments.find().pretty()
+
+-->Insert many Rows
+" , " take look at , 
+
+db.comments.insertMany([{
+    'name': 'Harry',
+    'lang': 'JavaScript',
+    'member_since': 5
+    }, 
+    {'name': 'Rohan',
+    'lang': 'Python',
+    'member_since': 3
+    },
+    {'name': 'Lovish',
+    'lang': 'Java',
+    'member_since': 4
+}])
+
+
+-->search in MongoDB datbase
+db.comments.find({'name':'linux' })
+
+
+-->to view only selected commands 
+ db.comments.find().pretty().limit(2)
+
+ -->Count the number of rows in the op
+
+ 
+-->find first row matching the function findone
+db.comments.findone().count()
+
+
+-->to update row
+db.comments.update({//findng key 'name':'linux'} , {object with modification })
+
+---
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+
+
+upsert means agar koi object match nahi hota toh kya aap naya object banana chahege to 
+
+db.comments.update({'name' : 'linuxmac'} , { 'name' : 'linuxmac' , 'version' : 45.5 , 'author' : 'getch' } ,{upsert:true})
+
+-----
+-->to increment in db
+
+db.comments.update({'name' :'linuxmac'},
+{$inc:{
+    'version' : 5 //kitine incre te liha
+}})
+
+--
+MongoDB Rename Operator
+
+db.comments.update(
+    {name : 'linuxmac'},
+    {$rename:
+    {
+        version: 'prototype'
+    }
+     }
+)
+
+
+~~~
+
+delete row
+db.comments.remove({id :1}) //criteria in brackets
+
+~~~~
+less than in MongoDB
+
+db.comments.find({version: {$lt :90}})
+
+it will print all version less than 90
+
+~~~
+greater than in MongoDB
+
+db.comments.find({version: {$gt :90}})
+
+it will print all version greater than 90
+
+
+#count data
+db.student.find({'class':'ty'}).count()
